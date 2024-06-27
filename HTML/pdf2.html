@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF using HTML</title>
+    <style>
+        .split {
+            width: 50%;
+            position: absolute;
+            height: 100%;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+        }
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="split left">
+        <div class="centered">
+            <p style="font-family: Arial, Helvetica, sans-serif;">
+                <b><font size="7">English BalBharti</font></b>
+            </p>
+            <embed type="application/pdf" src="pdf/203010001.pdf" width="350" height="300"></embed>
+        </div>
+    </div>
+    <div class="split right">
+        <div class="centered">
+            <b><p style="font-family: Arial, Helvetica, sans-serif;">
+                <font size="7">YouTube Video</font>
+            </p></b>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ZovNuary00U?si=JWIMxiBkyK5nbo6I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>         
+</body>
+</html>
