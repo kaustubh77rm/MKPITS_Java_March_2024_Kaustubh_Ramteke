@@ -1,0 +1,16 @@
+.body{
+
+    background: linear-gradient(90deg, #F4A1FC 2.05%,#16D9D9 97.96%);  
+    font-family: 'Comfortaa', cursive;
+}
+.h1{
+    text-align: center; 
+    font-size: 45px;
+    color: rgb(255, 255, 255);
+    font-weight:bolder;
+}
+.p{
+    text-align: center;
+    color: black;
+    font-size: 25px;
+}
