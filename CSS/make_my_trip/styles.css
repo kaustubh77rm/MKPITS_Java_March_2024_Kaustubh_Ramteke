@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ff0d00;
+    color: white;
+    padding: 20px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+main .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.search-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-section h2 {
+    margin-top: 0;
+}
+
+.search-section form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-section label {
+    flex-basis: 100%;
+    margin-bottom: 5px;
+}
+
+.search-section input,
+.search-section button {
+    padding: 10px;
+    border: 1px solid #a27878;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.search-section button {
+    color: white;
+    background-color: #0056b3;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    cursor: pointer;
+    flex-basis: 100%;
+    font-size: 20px;
+}
+
+.search-section button:hover {
+    color: black;
+    background-color: #43ff0a;
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+a{
+    font-size: 25px;
+}
+label{
+    font-size: 21px;
+}
+body{
+    background-image: url("f.jpg");
+}
