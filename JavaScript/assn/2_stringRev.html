@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>String Reverse</title>
+        <style>
+            body{
+                font-size: 45px;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            function reverseString(str) {
+                var newString = "";
+                for (var i = str.length - 1; i >= 0; i--) {
+                    newString = newString + str[i];
+                }
+                    return newString;
+                }
+                    </script>
+                    <p>Enter a string to reverse:</p>
+                    <input type="text" id="string" name="string" value="Enter a string to reverse:">
+                    <button onclick="document.getElementById('string').value = reverseString(document.getElementById('string').value
+                    );">Reverse</button>
+                    <p id="output"></p>
+                    </body>
+                  
+    </body>
+</html>
