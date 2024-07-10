@@ -1,0 +1,109 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <script src="newConverter.js"></script>
+    <style>
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background: linear-gradient(90deg, #030303 5.79%, #d3e9ee 86.41%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff; /* Tomato color */
+            text-align:left;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .card {
+            background: rgba(1, 130, 51, 0.12);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 10px;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .card input[type="text"],
+        .card select,
+        .card input[type="button"] {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .card input[type="text"],
+        .card select {
+            background: rgb(255, 255, 255);
+            color: #000000;
+        }
+
+        .card input[type="button"] {
+            background: #ffa600; /* Tomato color */
+            color: #000000;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .card input[type="button"]:hover {
+            background: #ff6600; /* Darker tomato color */
+        }
+
+        .card label {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .card #output3 {
+            font-size: 1.3rem;
+            margin-top: 15px;
+        }
+
+        .card input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.7); /* Light grey color */
+        }
+    </style>
+</head>
+<body>
+    <h1>Currency Converter</h1>
+    <div class="card">
+        <input type="text" placeholder="Enter Amount" id="newinput">
+        <label>From</label>
+        <select name="From" id="fromselect">
+            <option id="11" value="INR" selected>INR</option>
+            <option id="12" value="USD">USD</option>
+            <option id="13" value="POUND">POUND</option>
+            <option id="14" value="YEN">YEN</option>
+        </select>
+        <label>To</label>
+        <select name="convert to" id="toselect">
+            <option id="21" value="INR">INR</option>
+            <option id="22" value="USD" selected>USD</option>
+            <option id="23" value="POUND">POUND</option>
+            <option id="24" value="YEN">YEN</option>
+        </select>
+        <input type="button" value="Convert" onclick="convert((document.getElementById('fromselect')).value,(document.getElementById('toselect')).value,(document.getElementById('newinput')).value)">
+        <label id="output3" style="font-size: 25px; text-align: center;"></label>
+    </div>
+</body>
+</html>
