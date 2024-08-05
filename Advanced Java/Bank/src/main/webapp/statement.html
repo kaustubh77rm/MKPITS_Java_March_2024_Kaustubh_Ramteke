@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statement</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .statement-container { background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 600px; }
+        .statement-container h1 { font-size: 24px; margin-bottom: 20px; }
+        .statement-container table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .statement-container table, .statement-container th, .statement-container td { border: 1px solid #ddd; }
+        .statement-container th, .statement-container td { padding: 8px; text-align: left; }
+        .statement-container th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="statement-container">
+        <h1>Transaction Statement</h1>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Balance</th>
+            </tr>
+            <!-- Add transaction rows here -->
+        </table>
+        <form method="post" action="BankJava1">
+            <input type="hidden" name="userid" value="${userid}">
+            <input type="hidden" name="password" value="${password}">
+            <input type="submit" name="action" value="Back" style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+        </form>
+    </div>
+</body>
+</html>
