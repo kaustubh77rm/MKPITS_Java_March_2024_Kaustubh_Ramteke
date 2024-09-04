@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 450px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: #333;
+            text-align: center;
+            background: linear-gradient(to right, #007BFF, #0056b3);
+            color: #fff;
+            padding: 1px;
+            border-radius: 5px;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 1.2em;
+            color: #333;
+            text-align: center;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .info-table th, .info-table td {
+            padding: 11px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .info-table th {
+            background-color: #f4f4f4;
+            font-weight: normal;
+        }
+        .info-table td {
+            background-color: #fff;
+        }
+        .info-table td span {
+            font-weight: bold;
+        }
+        .back-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .back-button {
+            appearance: none;
+            background-color: #FFFFFF;
+            border-radius: 40em;
+            border-style: none;
+            box-shadow: #ADCFFF 0 -12px 6px inset;
+            box-sizing: border-box;
+            color: #000000;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system, sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -.24px;
+            margin: 0;
+            outline: none;
+            padding: 1rem 1.3rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        .back-button:hover {
+            background-color: #FFC229;
+            box-shadow: #FF6314 0 -6px 8px inset;
+            transform: scale(1.125);
+        }
+        .back-button:active {
+            transform: scale(1.025);
+        }
+        @media (min-width: 768px) {
+            .back-button {
+                font-size: 1.5rem;
+                padding: .75rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Student Details</h1>
+    <h2>Student Information</h2>
+    <table class="info-table">
+        <tr>
+            <th>ID:</th>
+            <td><span th:text="${student.id}"></span></td>
+        </tr>
+        <tr>
+            <th>First Name:</th>
+            <td><span th:text="${student.firstname}"></span></td>
+        </tr>
+        <tr>
+            <th>Last Name:</th>
+            <td><span th:text="${student.lastname}"></span></td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td><span th:text="${student.email}"></span></td>
+        </tr>
+    </table>
+
+    <h2>Student Address</h2>
+    <table class="info-table">
+        <tr>
+            <th>Address:</th>
+            <td><span th:text="${student.studentDetails.address}"></span></td>
+        </tr>
+        <tr>
+            <th>City:</th>
+            <td><span th:text="${student.studentDetails.city}"></span></td>
+        </tr>
+        <tr>
+            <th>State:</th>
+            <td><span th:text="${student.studentDetails.state}"></span></td>
+        </tr>
+        <tr>
+            <th>Country:</th>
+            <td><span th:text="${student.studentDetails.country}"></span></td>
+        </tr>
+    </table>
+    <div class="back-button-container">
+        <a class="back-button" href="/students/list">Back to Students List</a>
+    </div>
+</div>
+</body>
+</html>
