@@ -58,14 +58,7 @@ public class StudentController {
 
     @PostMapping("/update")
     public String updateStudent(@ModelAttribute("student") Student student) {
-        // Check if the student object is properly populated
-        if (student == null || student.getId() == 0) {
-            throw new IllegalArgumentException("Invalid student data");
-        }
-
-        // Update the student entity in the database
         studentservice.update(student);
-
         return "redirect:/students/list";
     }
 
