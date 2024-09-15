@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean id="s1" class="spring1.Student">
+	<constructor-arg value="Akshay"></constructor-arg>
+	</bean>
+	
+	<bean id="a1" class="spring1.Address">	
+	<constructor-arg value="Nagpur"></constructor-arg>	
+	<constructor-arg value="Maharashtra"></constructor-arg>
+	<constructor-arg value="India"></constructor-arg>
+	</bean>
+	
+	<bean id="s2" class="spring1.Student">
+	<constructor-arg value="Akash"></constructor-arg>
+	<constructor-arg value="95" type="int"></constructor-arg>
+	<constructor-arg> <ref bean = "a1"/> </constructor-arg>
+	</bean>
+	
+	<bean id="s3" class="spring1.Student">
+	<constructor-arg>
+	<list>
+	<value>Physics</value>
+	<value>Chemistry</value>
+	<value>Maths</value>
+	</list>
+	</constructor-arg>
+	</bean>
+	
+	<bean id="s4" class="spring1.Student">
+	<constructor-arg>
+	<map>
+	<entry key="SSC" value="88"></entry>
+	<entry key="HSC" value="78"></entry>
+	<entry key="Grad" value="68"></entry>
+	</map>
+	</constructor-arg>
+	</bean>
+    
+    <bean id="s5" class="spring1.Student">
+	<constructor-arg value="Akash"></constructor-arg>
+	<constructor-arg value="95" type="int"></constructor-arg>
+	<constructor-arg> <ref bean = "a1"/> </constructor-arg>
+	<constructor-arg>
+	<list>
+	<value>Physics</value>
+	<value>Chemistry</value>
+	<value>Maths</value>
+	</list>
+	</constructor-arg>
+	<constructor-arg>
+	<map>
+	<entry key="SSC" value="88"></entry>
+	<entry key="HSC" value="78"></entry>
+	<entry key="Grad" value="68"></entry>
+	</map>
+	</constructor-arg>
+	</bean>
+    
+</beans>

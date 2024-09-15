@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="a1" class="spring1.Address"> 
+	<property name="city"><value>Mumbai</value></property>	
+	<property name="state"><value>MH</value></property>	
+	<property name="country"><value>IND</value></property>	
+	</bean>
+	
+	<bean id="s1" class="spring1.Student">
+	<property name="name" value="Tanay"/>
+	<property name="age" value='25'/>
+	<property name="address" ref ="a1"/>
+
+	<property name="list">
+	<list>
+	<value>Physics</value>
+	<value>Chemistry</value>
+	<value>Maths</value>
+	</list>
+	</property>
+	
+	<property name="map">
+	<map>
+	<entry key="SSC" value="88"></entry>
+	<entry key="HSC" value="78"></entry>
+	<entry key="Grad" value="68"></entry>
+	</map>
+	</property>
+	
+	</bean>
+    
+</beans>
