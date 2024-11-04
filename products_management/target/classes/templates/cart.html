@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Cart</title>
+  <style>
+    .button-56 {
+      align-items: center;
+      background-color: #fee6e3;
+      border: 2px solid #111;
+      border-radius: 8px;
+      box-sizing: border-box;
+      color: #111;
+      cursor: pointer;
+      display: flex;
+      font-family: Inter, sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+      height: 48px;
+      justify-content: center;
+      line-height: 24px;
+      max-width: 100%;
+      padding: 0 25px;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-56:after {
+      background-color: #111;
+      border-radius: 8px;
+      content: "";
+      display: block;
+      height: 48px;
+      left: 0;
+      width: 100%;
+      position: absolute;
+      top: -2px;
+      transform: translate(8px, 8px);
+      transition: transform .2s ease-out;
+      z-index: -1;
+      text-align: center;
+    }
+
+    .button-56:hover:after {
+      transform: translate(0, 0);
+    }
+
+    .button-56:active {
+      background-color: #ffdeda;
+      outline: 0;
+    }
+
+    .button-56:hover {
+      outline: 0;
+    }
+
+    @media (min-width: 768px) {
+      .button-56 {
+        padding: 0 40px;
+      }
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1{
+      font-size: 23px;
+      color: #333;
+      text-align: center;
+      flex-grow: 1;
+      margin-right: 110px;
+    }
+
+    h2 {
+      font-size: 23px;
+      color: #333;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .table-container {
+      width: 80%;
+      margin: 4px auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th {
+      font-size: 20px;
+      background-color: #f8f8f8;
+      font-weight: bold;
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    td {
+      font-size: 19px;
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .add-product-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .add-product-button:hover {
+      background-color: #0056b3;
+    }
+
+    .remove-button, .checkout-button {
+      padding: 9px 10px;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .checkout-button {
+      background-color: #28a745;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .checkout-button:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
+
+    .styled-hr {
+      border: none;
+      height: 2px;
+      background-color: #ccc;
+      margin: 20px auto;
+      width: 80%;
+    }
+
+    a {
+      text-underline: none;
+      text-decoration: none;
+      color: black;
+    }
+
+    p{
+      font-size: 20px;
+    }
+
+
+
+    .glass-summary h3 {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      margin-bottom: 20px;
+    }
+
+    .glass-summary table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .glass-summary th, .glass-summary td {
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 19px;
+    }
+
+    .glass-summary th {
+      font-size:20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: black;
+      font-weight: bold;
+    }
+
+    .glass-bill {
+      width: 400px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .glass-bill h3 {
+      color: black;
+      font-family:arial,sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .total-amount {
+      font-family:arial,sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: black;
+      border-radius: 8px;
+    }
+
+    .checkout-button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 19px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .checkout-button:hover {
+      background-color: #218838;
+      transform: scale(1.1);
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div class="header-container">
+  <div class="back-button-container" style="margin-right: auto;">
+    <button class="button-56" th:onclick="|window.location='@{/customer}'|">Back</button>
+  </div>
+  <h1>Available Product(s)</h1>
+</div>
+
+<section>
+  <table class="table-container">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price(₹)</th>
+      <th>Stock(s)</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+      <td th:text="${product.id}"></td>
+      <td th:text="${product.prodName}"></td>
+      <td th:text="${product.prodDescription}"></td>
+      <td th:text="${product.prodPrice}"></td>
+      <td th:text="${product.prodStockQuantity}"></td>
+      <td>
+        <form th:action="@{cart/add/{id}(id=${product.id})}" method="post" style="display: inline;">
+          <button type="submit" class="add-product-button" onclick="disableAddButton(this)">Add</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="styled-hr" />
+
+<div style="text-align: center;">
+  <h2>Cart</h2>
+</div>
+<center><p th:text="'Cart Items Size: ' + ${#lists.size(cartItems)}"></p></center>
+<table class="table-container" id="cartTable">
+  <thead>
+  <tr>
+    <th>Product Name</th>
+    <th>Quantity</th>
+    <th>Price(₹)</th>
+    <th>Amount(₹)</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody id="cartItemsBody">
+  <tr th:each="item : ${cartItems}">
+    <td th:text="${item.product.prodName}"></td>
+    <td th:text="${item.quantity}"></td>
+    <td th:text="${item.price}"></td>
+    <td th:text="${item.quantity * item.price}"></td>
+    <td>
+      <form th:action="@{cart/remove/{productId}(productId=${item.product.id})}" method="post" style="display: inline;">
+        <button type="submit" class="remove-button">Remove</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div th:if="${#lists.size(cartItems) > 0}" class="glass-bill">
+  <h3>Billing Summary</h3>
+
+  <div class="total-amount">
+    Total Amount to Pay: ₹<span th:text="${totalAmount}" id="totalAmount"></span>
+  </div>
+
+  <form id="checkoutForm" th:action="@{cart/submit}" method="post">
+    <input type="hidden" name="items" th:each="item : ${cartItems}"
+           th:value="${item.product.id} + ',' + ${item.quantity}" />
+    <button type="submit" class="checkout-button">Checkout</button>
+  </form>
+</div>
+
+
+<script>
+  function disableAddButton(button) {
+    setTimeout(() => {
+      button.disabled = true;
+      button.textContent = "Added";
+      button.style.backgroundColor = "#ccc";
+      button.style.cursor = "not-allowed";
+    }, 300);
+  }
+</script>
+</body>
+</html>

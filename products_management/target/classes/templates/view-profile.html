@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <title>Profile Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+        }
+
+        .top-right-buttons {
+            display: flex;
+            justify-content: center; /* Center the buttons */
+            margin-bottom: 10px;
+        }
+
+        .top-right-buttons button {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 12px;
+            margin-left: 25px; /* Add some margin between buttons */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .edit-button {
+            background-color: #007bff; /* Blue for Edit */
+            color: white;
+        }
+
+        .edit-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.3);
+        }
+
+        .delete-button {
+            background-color: #dc3545; /* Red for Delete */
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #a71d2a;
+            transform: scale(1.3);
+        }
+
+        section {
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-align: center;
+            color: black;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 1px auto;
+        }
+
+        th {
+            width:10%;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+            background: linear-gradient(to right,#4a0089, #58c0ff);
+            color: white;
+            white-space: nowrap;
+        }
+
+        td {
+            width:10%;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .view-button {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 15px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: purple;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .view-button:hover {
+            background-color: #30013a;
+            transform: scale(1.2);
+        }
+
+        /* New styles to remove underline and set color for links */
+        .top-right-buttons a {
+            text-decoration: none; /* Remove underline */
+            color: white; /* Set link color to white */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Profile Details</h1>
+
+<div class="top-right-buttons">
+    <button class="edit-button"> <a th:href="@{/customer/edit-profile/{email}(email=${user.email})}">Edit Profile</a> </button>
+
+    <a th:href="@{/customer/delete-profile/{email}(email=${user.email})}" onclick="return confirm('Are you sure you want to delete your profile? This action cannot be undone.');">
+        <button class="delete-button">Delete Profile</button>
+    </a>
+
+</div>
+
+<section>
+    <h2>Profile Information</h2>
+    <table>
+        <tbody>
+        <tr>
+            <th>First Name</th>
+            <td th:text="${user.firstName}"></td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td th:text="${user.lastName}"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td th:text="${user.email}"></td>
+        </tr>
+        <tr>
+            <th>City</th>
+            <td th:text="${user.city}"></td>
+        </tr>
+        <tr>
+            <th>State</th>
+            <td th:text="${user.state}"></td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td th:text="${user.country}"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<button class="view-button" onclick="window.location.href='/customer'">Back to Customer Dashboard</button>
+
+</body>
+</html>

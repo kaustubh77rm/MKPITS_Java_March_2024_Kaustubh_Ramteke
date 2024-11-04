@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      align-content: center;
+      text-align: center;
+      color: #333;
+    }
+
+    section {
+      margin: 20px 0;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 24px;
+      align-content: center;
+      text-align: center;
+      color: black;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      font-family: arial,sans-serif;
+      font-size: 20px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: purple;
+      color: white;
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .button {
+      padding: 10px 15px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .button-1 {
+      margin-top: 2px;
+      font-size: 22px;
+      font-weight: bold;
+      background-color: rgb(255, 255, 255);
+      color: purple;
+      padding: 7px 20px;
+      cursor: pointer;
+      border-color: purple;
+      border-radius: 99px;
+      border-style: ridge;
+    }
+
+    .button-1:hover {
+      background-color: #d4d4d4;
+    }
+
+    .button-56 {
+      font-weight:bold;
+      align-items: center;
+      background-color: #fee6e3;
+      border: 2px solid #111;
+      border-radius: 8px;
+      box-sizing: border-box;
+      color: #111;
+      cursor: pointer;
+      display: flex;
+      font-family: Inter,sans-serif;
+      font-size: 22px;
+      height: 48px;
+      justify-content: center;
+      line-height: 24px;
+      max-width: 100%;
+      padding: 0 25px;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-56:after {
+      background-color: #111;
+      border-radius: 8px;
+      content: "";
+      display: block;
+      height: 48px;
+      left: 0;
+      width: 100%;
+      position: absolute;
+      top: -2px;
+      transform: translate(8px, 8px);
+      transition: transform .2s ease-out;
+      z-index: -1;
+    }
+
+    .button-56:hover:after {
+      transform: translate(0, 0);
+    }
+
+    .button-56:active {
+      background-color: #ffdeda;
+      outline: 0;
+    }
+
+    .button-56:hover {
+      outline: 0;
+    }
+
+    @media (min-width: 768px) {
+      .button-56 {
+        padding: 0 40px;
+      }
+    }
+
+    .div-success{
+      font-weight:bold;
+      text-align:center;
+      font-size:22px;
+      color:green;
+      margin-top:12px;
+    }
+
+  </style>
+</head>
+<body>
+
+<button class="button-56" onclick="window.location.href='/home'">Back</button>
+<h1>Admin Dashboard</h1>
+
+<section>
+  <h2>Customer(s)</h2>
+  <br>
+  <div style="text-align: center; margin-bottom: 15px;">
+    <input type="text" id="customerTableSearch" placeholder="Enter Customer Name" style="font-size: 18px; padding: 8px; width: 300px;">
+  </div>
+  <table id="customerTable">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}" th:data-name="${user.firstName + ' ' + user.lastName}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.firstName}"></td>
+      <td th:text="${user.lastName}"></td>
+      <td th:text="${user.email}"></td>
+      <td>
+        <a th:href="@{/admin/view-customer/{email}(email=${user.email})}" class="button button-1">View</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Customer Order(s)</h2>
+  <br>
+<!--  <div style="text-align: center; margin-bottom: 15px;">-->
+<!--    <input type="text" id="customerSearch" placeholder="Enter Name" style="font-size: 18px; padding: 8px; width: 300px;">-->
+<!--  </div>-->
+
+  <table id="orderTable">
+    <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Customer ID</th>
+      <th>Customer Name</th>
+      <th>Ordered Product(s)</th>
+      <th>Bill(₹)</th>
+      <th>Order Date</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}" th:data-name="${order.user.firstName + ' ' + order.user.lastName}">
+      <td th:text="${order.id}"></td>
+      <td th:text="${order.user.id}"></td>
+      <td th:text="${order.user.firstName+' '+order.user.lastName}"></td>
+      <td>
+        <table style="width: 100%; border: 1px solid #ddd; background-color: #f9f9f9;">
+          <thead>
+          <tr>
+            <th style="background-color: #0094e1; color: white;">Product Name</th>
+            <th style="background-color: #03a3ff; color: white;">Quantity</th>
+            <th style="background-color: #0094e1; color: white;">Price (₹)</th>
+            <th style="background-color: #03a3ff; color: white;">Total Price (₹)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="item : ${order.orderItems}">
+            <td th:text="${item.product.prodName}"></td>
+            <td th:text="${item.orderQuantity}"></td>
+            <td th:text="${item.product.prodPrice}"></td>
+            <td th:text="${item.product.prodPrice * item.orderQuantity}"></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </td>
+      <td th:text="${order.orderTotalAmount}"></td>
+      <td th:text="${order.orderDate}"></td>
+      <td th:text="${order.orderStatus}"></td>
+      <td>
+        <form th:action="@{/admin/orders/approve/{id}(id=${order.id})}" method="post" style="display:inline;">
+          <button type="submit" class="button button-1">Accept</button>
+        </form>
+        <form th:action="@{/admin/orders/reject/{id}(id=${order.id})}" method="post" style="display:inline;">
+          <button type="submit" class="button button-1">Reject</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Search functionality for "Customer(s)" table
+    const customerSearchInput = document.getElementById("customerTableSearch");
+    const customerRows = document.querySelectorAll("#customerTable tbody tr");
+
+    customerSearchInput.addEventListener("input", function() {
+      const searchValue = this.value.toLowerCase().trim();
+      customerRows.forEach(row => {
+        const customerName = row.getAttribute("data-name") || "";
+        row.style.display = customerName.toLowerCase().includes(searchValue) ? "" : "none";
+      });
+    });
+
+    // Search functionality for "Customer Order(s)" table
+    const orderSearchInput = document.getElementById("customerSearch");
+    const orderRows = document.querySelectorAll("#orderTable tbody tr");
+
+    orderSearchInput.addEventListener("input", function() {
+      const searchValue = this.value.toLowerCase().trim();
+      orderRows.forEach(row => {
+        const customerName = row.getAttribute("data-name") || "";
+        row.style.display = customerName.toLowerCase().includes(searchValue) ? "" : "none";
+      });
+    });
+  });
+</script>
+
+<section>
+  <h2>Product(s)</h2>
+  <br>
+  <center><a th:href="@{admin/add-product}" class="button-1"> Add a product </a></center>
+  <br>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price(₹)</th>
+      <th>Stock</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+      <td th:text="${product.id}"></td>
+      <td th:text="${product.prodName}"></td>
+      <td th:text="${product.prodDescription}"></td>
+      <td th:text="${product.prodPrice}"></td>
+      <td th:text="${product.prodStockQuantity}"></td>
+      <td>
+        <a th:href="@{/admin/edit-product/{id}(id=${product.id})}" class="button button-1">Edit</a>
+
+        <form th:action="@{/admin/delete-product/{id}(id=${product.id})}" method="get" style="display:inline;">
+          <button type="submit" class="button button-1">Delete</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="div-success" th:if="${param.added}">
+    Product added successfully!
+  </div>
+  <div class="div-success" th:if="${param.edited}">
+    Product modified successfully!
+  </div>
+</section>
+</body>
+</html>

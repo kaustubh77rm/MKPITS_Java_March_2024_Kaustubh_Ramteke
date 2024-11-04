@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 80px 20px 60px; /* Padding adjusted to accommodate the fixed header and footer */
+      background-image: url('https://dtlive.s3.ap-south-1.amazonaws.com/16264/E-Commerce-Animated-GIF-Icon-Pack-by-Discover-Template-1.gif');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; /* Makes sure the background stays in place on scroll */
+    }
+
+    header {
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    footer {
+      font-size: 20px;
+      text-align: center;
+      padding: 10px;
+      background: linear-gradient(to right,#C33764, #1D2671); /* Apply linear gradient */
+      color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin-right: 35px;
+    }
+
+    /* Button Styles */
+    .button-74 {
+      background-color: #fbeee0;
+      border: 2px solid #422800;
+      border-radius: 10px;
+      box-shadow: #422800 4px 4px 0 0;
+      color: #422800;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 24px;
+      padding: 0 13px;
+      line-height: 50px;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-74:hover {
+      background-color: #fff;
+    }
+
+    .button-74:active {
+      box-shadow: #422800 2px 2px 0 0;
+      transform: translate(2px, 2px);
+    }
+
+    @media (min-width: 768px) {
+      .button-74 {
+        min-width: 120px;
+        padding: 0 25px;
+      }
+    }
+
+    /* Logout Button Styles */
+    .logout-button {
+      background-color: #ff4d4d; /* Bright red background */
+      border: none; /* No border */
+      border-radius: 25px; /* Rounded corners */
+      color: white; /* White text color */
+      cursor: pointer; /* Pointer cursor */
+      font-weight: bold; /* Bold text */
+      font-size: 22px; /* Font size */
+      padding: 10px 20px; /* Padding for the button */
+      transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    }
+
+    .logout-button:hover {
+      background-color: #e60000; /* Darker red on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    .logout-button:active {
+      transform: translateY(1px); /* Downward effect on click */
+    }
+
+    /* Other existing styles... */
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      margin-top:1px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center; /* Center-align the content */
+      z-index: 1; /* Make sure content is above the background */
+      position: relative;
+    }
+    h1 {
+      margin-left:240px;
+      margin-right:420px;
+      padding-top: 0;
+      padding-bottom: 10px;
+      color: black;
+      background: rgba(246, 241, 241, 0.8);
+      border-radius: 1px;
+      backdrop-filter: blur(2.5);
+      -webkit-backdrop-filter: blur(4.5);
+      border: 1px solid rgba(246, 241, 241, 0.8);
+      text-align: center;
+      flex-grow: 1;
+    }
+    h2 {
+      font-size: 22px;
+      color: #333333;
+      margin-bottom: 15px;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      font-size: 22px;
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 2px solid #ddd;
+      width: 30%;
+    }
+
+    table td {
+      font-size: 22px;
+      background-color: rgb(225, 225, 225);
+      color: black;
+      font-weight: bolder;
+      text-transform: uppercase;
+      border-bottom: 1px solid #ddd;
+      width: 70%;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .role-link a {
+      box-shadow: #cc04f8 0 -12px 6px inset;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      background-color: #620177;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 20px;
+    }
+
+    .role-link a:hover {
+      font-size: 24px;
+      background-color: #ff2a00;
+    }
+
+    .header-table {
+      margin-right: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    img {
+      max-width: 100%; /* Responsive image */
+      height: auto; /* Maintain aspect ratio */
+      margin-top: 20px; /* Space above the image */
+    }
+    .email-text {
+      text-transform: lowercase;
+    }
+    .slider-container {
+      max-width: 600px;
+      margin: 40px auto;
+      position: relative;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .slide {
+      display: none;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .active-slide {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slider-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .slider-btn {
+      background-color: #620177;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .slider-btn:hover {
+      background-color: #ff2a00;
+    }
+
+    .slide h3 {
+      font-size: 28px;
+      margin: 0;
+      color: #620177;
+    }
+
+    .slide p {
+      font-size: 20px;
+      margin: 5px 0 0;
+      color: #333;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://dtlive.s3.ap-south-1.amazonaws.com/16264/E-Commerce-Animated-GIF-Icon-Pack-by-Discover-Template-1.gif');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow: hidden; /* Disable scrolling */
+    }
+
+    header, footer {
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header {
+      top: 0;
+    }
+
+    footer {
+      bottom: 0;
+      background: linear-gradient(to right, #C33764, #1D2671);
+      font-size: 22px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-right: 25px;
+    }
+
+    main {
+      max-width: 90%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 9px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      top: 80px;
+      overflow: hidden;
+      height: calc(100vh - 160px);
+
+    }
+
+    .logout-button {
+      font-size: 18px;
+      padding: 8px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .video-container {
+      width: 16%;
+      margin: 10px auto;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .video-container iframe {
+      width: 30%;
+      height: 30%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .slider-container {
+      max-width: 90%;
+      margin: 0 auto;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .active-slide {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <table>
+      <tr>
+        <th>Email</th>
+        <td class="email-text"><span sec:authentication="principal.username"></span></td>
+      </tr>
+      <tr>
+        <th>Role</th>
+        <td><span sec:authentication="principal.authorities"></span></td>
+      </tr>
+    </table>
+  </div>
+  <h1>Home Page</h1>
+  <nav>
+    <ul>
+      <li><a th:href="@{/logout}"><button class="logout-button">Logout</button></a></li>
+    </ul>
+  </nav>
+</header>
+<br><br><br><br>
+<main>
+  <section>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}">
+      <button class="button-74">Admin</button>
+    </a>
+
+    <a sec:authorize="hasRole('CUSTOMER')" th:href="@{/customer}">
+      <button class="button-74">Customer</button>
+    </a>
+  </section>
+
+  <section class="video-container">
+    <a href="https://ibb.co/GnFLRZM"><img src="https://i.ibb.co/VJ3ZTFC/products.gif" alt="ecommerce" border="0" /></a>
+  </section>
+
+  <section class="slider-container">
+    <div th:each="product, iterStat : ${products}">
+      <div class="slide" th:classappend="${iterStat.index == 0} ? 'active-slide' : ''">
+        <h3 th:text="${product.prodName}">Product Name</h3>
+        <p th:text="${product.prodDescription}">Product Description</p>
+      </div>
+    </div>
+
+    <div class="slider-nav">
+      <button class="slider-btn" onclick="plusSlides(-1)">&#10094; Previous</button>
+      <button class="slider-btn" onclick="plusSlides(1)">Next &#10095;</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p><center>&copy; 2024 Costub P&S. All rights reserved.</center></p>
+</footer>
+
+<script>
+  let slideIndex = 0;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function showSlides(n) {
+    let slides = document.getElementsByClassName("slide");
+    if (n >= slides.length) slideIndex = 0;
+    if (n < 0) slideIndex = slides.length - 1;
+    for (let slide of slides) {
+      slide.style.display = "none";
+    }
+    slides[slideIndex].style.display = "block";
+  }
+
+  setInterval(() => plusSlides(1), 5000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product</title>
+  <style>
+    .button-56 {
+      font-weight: bold;
+      align-items: center;
+      background-color: #fee6e3;
+      border: 2px solid #111;
+      border-radius: 8px;
+      box-sizing: border-box;
+      color: #111;
+      cursor: pointer;
+      display: flex;
+      font-family: Inter, sans-serif;
+      font-size: 22px;
+      height: 48px;
+      justify-content: center;
+      line-height: 24px;
+      max-width: 10%;
+      padding: 0 25px;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-56:after {
+      background-color: #111;
+      border-radius: 8px;
+      content: "";
+      display: block;
+      height: 48px;
+      left: 0;
+      width: 100%;
+      position: absolute;
+      top: -2px;
+      transform: translate(8px, 8px);
+      transition: transform .2s ease-out;
+      z-index: -1;
+    }
+
+    .button-56:hover:after {
+      transform: translate(0, 0);
+    }
+
+    .button-56:active {
+      background-color: #ffdeda;
+      outline: 0;
+    }
+
+    .button-56:hover {
+      outline: 0;
+    }
+
+    @media (min-width: 768px) {
+      .button-56 {
+        padding: 0 40px;
+      }
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+    input[type="text"],
+    input[type="number"] {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 20px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+
+  </style>
+  <script>
+    function validateForm() {
+      let isValid = true;
+
+      // Get form fields
+      const name = document.getElementById("name");
+      const description = document.getElementById("description");
+      const price = document.getElementById("price");
+      const stock = document.getElementById("stock");
+
+      // Get error message elements
+      const nameError = document.getElementById("name-error");
+      const descriptionError = document.getElementById("description-error");
+      const priceError = document.getElementById("price-error");
+      const stockError = document.getElementById("stock-error");
+
+      // Clear previous error messages
+      nameError.innerText = "";
+      descriptionError.innerText = "";
+      priceError.innerText = "";
+      stockError.innerText = "";
+
+      // Product name validation
+      if (name.value.length > 50) {
+        nameError.innerText = "Product name cannot exceed 50 characters.";
+        isValid = false;
+      }
+      name.value = name.value.charAt(0).toUpperCase() + name.value.slice(1);
+
+      // Description validation
+      if (description.value.length > 150) {
+        descriptionError.innerText = "Description cannot exceed 150 characters.";
+        isValid = false;
+      }
+      description.value = description.value.charAt(0).toUpperCase() + description.value.slice(1);
+
+      // Price validation
+      if (price.value <= 0) {
+        priceError.innerText = "Price must be greater than zero.";
+        isValid = false;
+      }
+
+      // Stock validation
+      if (stock.value <= 0) {
+        stockError.innerText = "Stock quantity must be greater than zero.";
+        isValid = false;
+      }
+
+      return isValid;
+    }
+  </script>
+</head>
+<body>
+
+<a th:href="@{/admin}" class="button-56">Back</a>
+
+<h2>Add Product</h2>
+<form th:action="@{/admin/add-product}" method="post" th:object="${product}" onsubmit="return validateForm()">
+  <label for="name"></label>
+  <input type="text" id="name" th:field="*{prodName}" placeholder="Enter Product Name" maxlength="50" required/>
+  <span id="name-error" class="error-message"></span>
+
+  <label for="description"></label>
+  <input type="text" id="description" th:field="*{prodDescription}" placeholder="Enter Description" maxlength="150" required/>
+  <span id="description-error" class="error-message"></span>
+
+  <label for="price"></label>
+  <input type="number" id="price" th:field="*{prodPrice}" placeholder="Enter Price (₹)" required/>
+  <span id="price-error" class="error-message"></span>
+
+  <label for="stock"></label>
+  <input type="number" id="stock" th:field="*{prodStockQuantity}" placeholder="Enter Stock Quantity" required/>
+  <span id="stock-error" class="error-message"></span>
+
+  <br>
+  <div style="display: flex; justify-content: center;">
+    <button class="button-56" type="submit">Add</button>
+  </div>
+</form>
+</body>
+</html>
