@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Customer Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      color: #333;
+    }
+
+    section {
+      margin: 20px auto; /* Center section */
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px; /* Max width for better readability */
+    }
+
+    h2 {
+      font-size: 24px;
+      text-align: center;
+      color: black;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+
+    table {
+      width: 100%; /* Full width of the section */
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin: 0 auto; /* Center the table */
+    }
+
+    th {
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      padding: 8px; /* Reduced padding for smaller size */
+      text-align: left;
+      border: 1px solid #ddd;
+      background-color: #00929e;
+      color: white;
+      white-space: nowrap; /* Prevent wrapping of header text */
+    }
+    td {
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      padding: 8px; /* Reduced padding for smaller size */
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    .view-button {
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 15px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      background-color: #007BFF; /* Blue color for view button */
+      display: block;
+      margin: 20px auto; /* Center the button */
+      text-align: center;
+      transition: background-color 0.3s, transform 0.3s; /* Add transition for hover effect */
+    }
+
+    .view-button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+      transform: scale(1.2); /* Slightly grow button on hover */
+    }
+  </style>
+</head>
+<body>
+
+<h1>Customer Details</h1>
+
+<section>
+  <h2>Customer Information</h2>
+  <table>
+    <tbody>
+    <tr>
+      <th>ID</th>
+      <td th:text="${user.id}"></td>
+    </tr>
+    <tr>
+      <th>First Name</th>
+      <td th:text="${user.firstName}"></td>
+    </tr>
+    <tr>
+      <th>Last Name</th>
+      <td th:text="${user.lastName}"></td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td th:text="${user.email}"></td>
+    </tr>
+    <tr>
+      <th>City</th>
+      <td th:text="${user.city}"></td>
+    </tr>
+    <tr>
+      <th>State</th>
+      <td th:text="${user.state}"></td>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <td th:text="${user.country}"></td>
+    </tr>
+    <tr>
+      <th>Created By</th>
+      <td th:text="${user.createdBy}"></td>
+    </tr>
+    <tr>
+      <th>Created Date</th>
+      <td th:text="${user.createdDate}"></td>
+    </tr>
+    <tr>
+      <th>Last Modified By</th>
+      <td th:text="${user.lastModifiedBy}"></td>
+    </tr>
+    <tr>
+      <th>Last Modified Date</th>
+      <td th:text="${user.lastModifiedDate}"></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<button class="view-button" onclick="window.location.href='/admin'">Back to Admin</button>
+
+</body>
+</html>

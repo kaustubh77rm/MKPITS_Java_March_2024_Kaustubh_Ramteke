@@ -1,0 +1,264 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            align-content: center;
+            text-align: center;
+            color: #333;
+        }
+
+        section {
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 24px;
+            text-align: center;
+            color: black;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            font-family: arial, sans-serif;
+            font-size: 22px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #008565;
+            color: white;
+        }
+
+        .orange-header {
+            background-color: #ff5d00;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+
+        .red-header {
+            background-color: #ff4200;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .button-56 {
+            align-items: center;
+            background-color: #fee6e3;
+            border: 2px solid #111;
+            border-radius: 8px;
+            box-sizing: border-box;
+            color: #111;
+            cursor: pointer;
+            display: flex;
+            font-family: Inter, sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            height: 48px;
+            justify-content: center;
+            line-height: 24px;
+            max-width: 100%;
+            padding: 0 25px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-56:after {
+            background-color: #111;
+            border-radius: 8px;
+            content: "";
+            display: block;
+            height: 48px;
+            left: 0;
+            width: 100%;
+            position: absolute;
+            top: -2px;
+            transform: translate(8px, 8px);
+            transition: transform .2s ease-out;
+            z-index: -1;
+            text-align: center;
+        }
+
+        .button-56:hover:after {
+            transform: translate(0, 0);
+        }
+
+        .button-56:active {
+            background-color: #ffdeda;
+            outline: 0;
+        }
+
+        .button-56:hover {
+            outline: 0;
+        }
+
+        @media (min-width: 768px) {
+            .button-56 {
+                padding: 0 40px;
+            }
+        }
+
+        .button-1 {
+            margin-top: 5px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: white;
+            color: #008565;
+            padding: 7px 20px;
+            cursor: pointer;
+            border-radius: 99px;
+            border-color: #008565;
+            border-style: ridge;
+        }
+
+        .button-1:hover {
+            background-color: #e1e1e1;
+        }
+
+        .top-right {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .glass-bill h3 {
+            color: black;
+            font-family: arial,sans-serif;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        section table td table {
+            width: 100%;
+            border: none;
+            background-color: #e8e5e5;
+        }
+
+        section table td table tr td {
+            border: 1px solid #ddd; /* Add border to product cells */
+            padding: 5px; /* Padding for product cells */
+            text-align: left; /* Align text to the left for better readability */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="top-right">
+    <div th:each="user : ${user}">
+        <a th:href="@{/customer/view-customer/{email}(email=${user.email})}" class="button-56">View Profile</a>
+    </div>
+</div>
+
+<button class="button-56" onclick="window.location.href='/home'">Back</button>
+<h1>Customer Dashboard</h1>
+
+<section>
+    <h2>Available Product(s)</h2>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <button class="button-1" onclick="location.href='/customer/cart'">Place an Order</button>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price(₹)</th>
+            <th>Stock(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.prodName}"></td>
+            <td th:text="${product.prodDescription}"></td>
+            <td th:text="${product.prodPrice}"></td>
+            <td th:text="${product.prodStockQuantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Order History</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Ordered Product(s)</th>
+            <th>Bill(₹)</th>
+            <th>Ordered Date</th>
+            <th>Order Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td>
+                <table style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th class="red-header">Product Name</th>
+                        <th class="orange-header">Quantity</th>
+                        <th class="red-header">Price(₹)</th>
+                        <th class="orange-header">Total Price(₹)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="orderItem : ${order.orderItems}">
+                        <td th:text="${orderItem.product.getProdName()}"></td>
+                        <td th:text="${orderItem.orderQuantity}"></td>
+                        <td th:text="${orderItem.product.prodPrice}"></td>
+                        <td th:text="${orderItem.product.prodPrice * orderItem.orderQuantity}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td th:text="${order.orderTotalAmount}"></td>
+            <td th:text="${order.orderDate}"></td>
+            <td th:text="${order.orderStatus}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+</body>
+</html>

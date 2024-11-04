@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Ordered Product(s)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .order-table {
+      width: 80%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      background-color: #f9f9f9;
+    }
+
+    th, td {
+      font-size: 20px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #0094e1;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .button-56 {
+      font-weight: bold;
+      background-color: #fee6e3;
+      border: 2px solid #111;
+      border-radius: 8px;
+      color: #111;
+      cursor: pointer;
+      display: block;
+      font-family: Inter, sans-serif;
+      font-size: 22px;
+      height: 48px;
+      margin: 20px auto;
+      padding: 0 25px;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      touch-action: manipulation;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button-56:after {
+      background-color: #111;
+      border-radius: 8px;
+      content: "";
+      display: block;
+      height: 48px;
+      left: 0;
+      width: 100%;
+      position: absolute;
+      top: -2px;
+      transform: translate(8px, 8px);
+      transition: transform .2s ease-out;
+      z-index: -1;
+    }
+
+    .button-56:hover:after {
+      transform: translate(0, 0);
+    }
+
+    .button-56:active {
+      background-color: #ffdeda;
+      outline: 0;
+    }
+
+    .button-56:hover {
+      outline: 0;
+    }
+
+    @media (min-width: 768px) {
+      .button-56 {
+        padding: 0 40px;
+      }
+    }
+
+    .bill-table {
+      width: 30%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      background-color: #fff;
+    }
+
+    .bill-table th, .bill-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    .bill-table th {
+      background-color: #0094e1;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<button class="button-56" onclick="window.location.href='/admin'">Back</button>
+<h1>Customer Ordered Product(s)</h1>
+
+<div th:each="order : ${orders}">
+  <center>
+    <table class="order-table">
+      <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price (₹)</th>
+        <th>Total Price (₹)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${order.orderItems}">
+        <td th:text="${item.product.prodName}"></td>
+        <td th:text="${item.orderQuantity}"></td>
+        <td th:text="${item.product.prodPrice}"></td>
+        <td th:text="${item.product.prodPrice * item.orderQuantity}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </center>
+
+  <center>
+    <table class="bill-table">
+      <thead>
+      <tr>
+        <th>Total Bill (₹)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td th:text="${order.orderTotalAmount}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+
+</body>
+</html>

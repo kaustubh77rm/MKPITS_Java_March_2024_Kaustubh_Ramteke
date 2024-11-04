@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      font-size: 20px;
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 48%;
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 21px;
+      transition: background-color 0.3s;
+    }
+
+    .register-button {
+      background-color: purple;
+    }
+
+    .register-button:hover {
+      background-color: #35014b;
+    }
+
+    .back-button {
+      background-color: green;
+    }
+
+    .back-button:hover {
+      background-color: #0a4b01;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('registrationForm');
+
+    form.addEventListener('submit', function (event) {
+      let isValid = true;
+
+      // Clear previous error messages
+      const errorMessages = [
+        'firstNameError', 'lastNameError', 'emailError',
+        'passwordError', 'countryError', 'stateError', 'cityError'
+      ];
+      errorMessages.forEach(errorId => {
+        document.getElementById(errorId).textContent = '';
+      });
+
+      // Validate First Name
+      const firstName = document.getElementById('firstName').value.trim();
+      if (!/^[A-Za-z\s]+$/.test(firstName)) {
+        document.getElementById('firstNameError').textContent = 'First name should contain only alphabets';
+        isValid = false;
+      }
+
+      // Validate Last Name
+      const lastName = document.getElementById('lastName').value.trim();
+      if (!/^[A-Za-z\s]+$/.test(lastName)) {
+        document.getElementById('lastNameError').textContent = 'Last name should contain only alphabets';
+        isValid = false;
+      }
+
+      // Validate Email
+      const email = document.getElementById('email').value.trim();
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailPattern.test(email)) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+        isValid = false;
+      }
+
+      // Validate Password
+      const password = document.getElementById('password').value.trim();
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+      if (!passwordPattern.test(password)) {
+        document.getElementById('passwordError').textContent = 'Password must be at least 8 characters long, and contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
+        isValid = false;
+      }
+
+      // Validate Country
+      const country = document.getElementById('country').value.trim();
+      if (!/^[A-Za-z\s]+$/.test(country)) {
+        document.getElementById('countryError').textContent = 'Country should contain only alphabets';
+        isValid = false;
+      }
+
+      // Validate State
+      const state = document.getElementById('state').value.trim();
+      if (!/^[A-Za-z\s]+$/.test(state)) {
+        document.getElementById('stateError').textContent = 'State should contain only alphabets';
+        isValid = false;
+      }
+
+      // Validate City
+      const city = document.getElementById('city').value.trim();
+      if (!/^[A-Za-z\s]+$/.test(city)) {
+        document.getElementById('cityError').textContent = 'City should contain only alphabets';
+        isValid = false;
+      }
+
+      if (!isValid) {
+        event.preventDefault(); // Prevent form submission if invalid
+      }
+    });
+  });
+</script>
+
+<h1>Customer Registration Form</h1>
+<form id="registrationForm" th:action="@{/register}" method="post">
+  <label>
+    <input type="text" id="firstName" name="firstName" placeholder="First Name" required maxlength="20" />
+    <span class="error-message" id="firstNameError"></span>
+  </label>
+  <label>
+    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required maxlength="20" />
+    <span class="error-message" id="lastNameError"></span>
+  </label>
+  <label>
+    <input type="email" id="email" name="email" placeholder="Email" required />
+    <span class="error-message" id="emailError"></span>
+  </label>
+  <label>
+    <input type="password" id="password" name="password" placeholder="Password" required />
+    <span class="error-message" id="passwordError"></span>
+  </label>
+  <label>
+    <input type="text" id="country" name="country" placeholder="Country" required maxlength="30" />
+    <span class="error-message" id="countryError"></span>
+  </label>
+  <label>
+    <input type="text" id="state" name="state" placeholder="State" required maxlength="30" />
+    <span class="error-message" id="stateError"></span>
+  </label>
+  <label>
+    <input type="text" id="city" name="city" placeholder="City" required maxlength="30" />
+    <span class="error-message" id="cityError"></span>
+  </label>
+  <div class="button-container">
+    <button type="submit" class="register-button">Register</button>
+    <button type="button" class="back-button" onclick="window.location.href='/login';">Back</button>
+
+  </div>
+</form>
+
+</body>
+</html>
